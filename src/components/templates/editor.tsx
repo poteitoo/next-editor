@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
+import { AppConfig } from '../../constants/config';
 import { Button } from '../atoms/Button';
 import { TextArea } from '../atoms/TextArea';
+import { Meta } from '../organisms/layout/Meta';
 
 export const Editor: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
@@ -19,6 +21,7 @@ export const Editor: React.FC = () => {
 
   return (
     <div className="container p-5">
+      <Meta title={AppConfig.title} description={AppConfig.description} />
       <h1 className="w-1/2 text-lg font-bold">字数カウンター</h1>
       <div className="flex">
         <label className="pr-10">
@@ -28,9 +31,10 @@ export const Editor: React.FC = () => {
         <label>空白抜き：{currentText.replace(/\s|　/g, '').length}</label>
       </div>
       <TextArea
-        className="w-full px-2 mt-2 whitespace-pre-wrap"
+        className="w-full p-2 mt-2 whitespace-pre-wrap placeholder-gray-600"
         onChangeText={setCurrentText}
         value={currentText}
+        placeholder="例：今日はガストでチーズインハンバーグを食べたい。"
       />
       <div className="flex">
         <Button addClassName="mr-5" onClick={onClickReset}>
