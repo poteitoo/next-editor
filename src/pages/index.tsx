@@ -1,5 +1,5 @@
-import { Base } from '../templates/Base';
+import { Editor } from '../components/templates/editor';
 
-const Index = () => <Base />;
+const Index = () => <Editor />;
 
 export default Index;
