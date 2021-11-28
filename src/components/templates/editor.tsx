@@ -22,7 +22,7 @@ export const Editor: React.FC = () => {
   return (
     <div className="container p-5">
       <Meta title={AppConfig.title} description={AppConfig.description} />
-      <h1 className="w-1/2 text-lg font-bold">字数カウンター</h1>
+      <h1 className="text-lg font-bold">字数カウンター</h1>
       <div className="flex">
         <label className="pr-10">
           空白こみ：{currentText.replace(/\n/g, '').length}

@@ -1,4 +1,4 @@
-import { Editor } from '../components/templates/editor';
+import { Editor } from '../components/templates/Editor';
 
 const Index = () => <Editor />;
 
