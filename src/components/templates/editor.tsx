@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { parseCookies, setCookie } from 'nookies';
 
 import { AppConfig } from '../../constants/config';
 import { Button } from '../atoms/Button';
@@ -9,14 +11,27 @@ export const Editor: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
   const [pastText, setPastText] = useState('');
 
+  useEffect(() => {
+    const { text } = parseCookies(null);
+    setCurrentText(text || '');
+  }, []);
+
   const onClickReset = () => {
-    setPastText(currentText);
-    setCurrentText('');
+    if (currentText.length > 0) {
+      setPastText(currentText);
+      setCookie(null, 'text', currentText, {
+        maxAge: 24 * 60 * 60,
+      });
+      setCurrentText('');
+    }
   };
   const onClickRecover = () => {
     const temp = currentText;
     setCurrentText(pastText);
     setPastText(temp);
+    setCookie(null, 'text', temp, {
+      maxAge: 24 * 60 * 60,
+    });
   };
 
   return (
@@ -40,7 +55,11 @@ export const Editor: React.FC = () => {
         <Button addClassName="mr-5" onClick={onClickReset}>
           リセットボタン
         </Button>
-        <Button disable={pastText.length === 0} onClick={onClickRecover}>
+        <Button
+          addClassName="mr-5"
+          onClick={onClickRecover}
+          disable={pastText.length === 0}
+        >
           元に戻す
         </Button>
       </div>
