@@ -9,26 +9,28 @@ import { Meta } from '../organisms/layout/Meta';
 
 export const Editor: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
-  const [pastText, setPastText] = useState('');
+  const [isPastTextExisted, setIsPastTextExisted] = useState(false);
 
   useEffect(() => {
     const { text } = parseCookies(null);
     setCurrentText(text || '');
+    setIsPastTextExisted(text !== undefined);
   }, []);
 
   const onClickReset = () => {
     if (currentText.length > 0) {
-      setPastText(currentText);
       setCookie(null, 'text', currentText, {
         maxAge: 24 * 60 * 60,
       });
       setCurrentText('');
+      setIsPastTextExisted(true);
     }
   };
   const onClickRecover = () => {
     const temp = currentText;
-    setCurrentText(pastText);
-    setPastText(temp);
+    const { text: pastText } = parseCookies(null);
+
+    setCurrentText(pastText || '');
     setCookie(null, 'text', temp, {
       maxAge: 24 * 60 * 60,
     });
@@ -58,7 +60,7 @@ export const Editor: React.FC = () => {
         <Button
           addClassName="mr-5"
           onClick={onClickRecover}
-          disable={pastText.length === 0}
+          disable={!isPastTextExisted}
         >
           元に戻す
         </Button>
