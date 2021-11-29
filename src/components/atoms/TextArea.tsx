@@ -5,7 +5,10 @@ type TextAreaProps = {
   className: string;
   value: string;
   placeholder?: string;
-};
+} & React.DetailedHTMLProps<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  HTMLTextAreaElement
+>;
 
 export const TextArea: React.FC<TextAreaProps> = ({
   onChangeText,
