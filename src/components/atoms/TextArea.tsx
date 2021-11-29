@@ -2,8 +2,8 @@ import React from 'react';
 
 type TextAreaProps = {
   onChangeText: (text: string) => void;
-  className: string;
   value: string;
+  className?: string;
   placeholder?: string;
 } & React.DetailedHTMLProps<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,

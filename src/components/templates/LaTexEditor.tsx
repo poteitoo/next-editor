@@ -40,21 +40,21 @@ export const LaTexEditor: React.FC = () => {
         />
       </Meta>
       <h1 className="text-lg font-bold">LaTexエディター</h1>
-      <div className="flex">
-        <div className="w-1/2 mr-5">
+      <div className="flex gap-8">
+        <div className="flex flex-col w-1/2">
           エディター
           <TextArea
-            className="w-full h-full rounded p-2 whitespace-pre-wrap placeholder-gray-600"
+            className="w-full h-full p-2 whitespace-pre-wrap placeholder-gray-500 textarea textarea-bordered"
             onChangeText={setCurrentText}
             value={currentText}
             placeholder="例：今日はガストでチーズインハンバーグを食べたい。"
           />
         </div>
-        <div className="flex flex-col w-1/2 mr-5">
+        <div className="flex flex-col w-1/2">
           プレビュー
           <div
             dangerouslySetInnerHTML={{ __html: compiledText }}
-            className="w-full h-full bg-white rounded p-2 whitespace-pre-wrap placeholder-gray-600"
+            className="w-full h-full p-2 whitespace-pre-wrap placeholder-gray-500 textarea textarea-bordered"
           />
         </div>
       </div>

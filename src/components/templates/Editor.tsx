@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { parseCookies, setCookie } from 'nookies';
 
 import { AppConfig } from '../../constants/config';
-import { Button } from '../atoms/Button';
 import { TextArea } from '../atoms/TextArea';
 import { Meta } from '../organisms/layout/Meta';
 
@@ -48,22 +47,25 @@ export const Editor: React.FC = () => {
         <label>空白抜き：{currentText.replace(/\s|　/g, '').length}</label>
       </div>
       <TextArea
-        className="w-full p-2 mt-2 whitespace-pre-wrap placeholder-gray-600"
+        className="w-full p-2 mt-2 whitespace-pre-wrap placeholder-gray-500 textarea textarea-bordered"
         onChangeText={setCurrentText}
         value={currentText}
         placeholder="例：今日はガストでチーズインハンバーグを食べたい。"
       />
-      <div className="flex">
-        <Button addClassName="mr-5" onClick={onClickReset}>
+      <div className="flex gap-5 mt-3">
+        <button
+          className="p-3 rounded hover:bg-gray-800 bg-gray-700"
+          onClick={onClickReset}
+        >
           リセットボタン
-        </Button>
-        <Button
-          addClassName="mr-5"
+        </button>
+        <button
+          className="p-3 rounded hover:bg-gray-800 bg-gray-700"
           onClick={onClickRecover}
-          disable={!isPastTextExisted}
+          disabled={!isPastTextExisted}
         >
           元に戻す
-        </Button>
+        </button>
       </div>
     </div>
   );
