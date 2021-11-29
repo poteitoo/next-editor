@@ -1,3 +1,5 @@
+const daisyui = require("daisyui");
+
 module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{js,ts,jsx,tsx}"],
@@ -48,6 +50,6 @@ module.exports = {
       },
     },
   },
+  plugins: [daisyui],
   variants: {},
-  plugins: [],
 };
