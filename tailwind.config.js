@@ -3,7 +3,7 @@ const daisyui = require("daisyui");
 module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: false,
+  darkMode: "media",
   theme: {
     fontSize: {
       xs: "0.75rem",
