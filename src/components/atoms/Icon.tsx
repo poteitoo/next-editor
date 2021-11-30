@@ -15,7 +15,7 @@ export const Icon: React.FC<IconProps> = ({
 }) => {
   return (
     <button
-      className={`p-3 mt-2 rounded hover:bg-gray-600 border border-gray-600`}
+      className="p-3 rounded hover:bg-gray-600 border border-gray-600"
       onClick={onClick}
       disabled={disable}
       {...props}
