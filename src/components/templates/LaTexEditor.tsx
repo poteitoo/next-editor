@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+import { AiOutlineSearch } from '@react-icons/all-files/ai/AiOutlineSearch';
 import katex from 'katex';
 
 import { AppConfig } from '../../constants/config';
+import { Icon } from '../atoms/Icon';
 import { TextArea } from '../atoms/TextArea';
 import { Meta } from '../organisms/layout/Meta';
 
@@ -39,7 +41,20 @@ export const LaTexEditor: React.FC = () => {
           crossOrigin="anonymous"
         />
       </Meta>
-      <h1 className="text-lg font-bold">LaTexエディター</h1>
+      <div className="flex justify-between">
+        <h1 className="text-lg font-bold">LaTexエディター</h1>
+        <Icon
+          icon={
+            <div className="flex align-center gap-2">
+              <AiOutlineSearch className="my-auto" size={24} />
+              <kbd className="kbd my-auto">⌘</kbd>
+              <span className="my-auto">+</span>
+              <kbd className="kbd my-auto">k</kbd>
+            </div>
+          }
+          onClick={() => console.log('clicked')}
+        />
+      </div>
       <div className="flex gap-8">
         <div className="flex flex-col w-1/2">
           エディター

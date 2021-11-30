@@ -14,6 +14,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "classnames": "^2.3.1",
     "daisyui": "^1.16.2",
     "katex": "^0.15.1",
