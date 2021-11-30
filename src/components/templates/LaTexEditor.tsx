@@ -26,13 +26,12 @@ export const LaTexEditor: React.FC = () => {
 
   useEffect(() => {
     if (searchText.length > 0) {
-      const reprSrc = katex_commands.filter((val) =>
-        val.src?.includes(searchText)
+      const repr = katex_commands.filter(
+        ({ src, symb }) =>
+          src?.includes(searchText) || symb.includes(searchText)
       );
-      const reprSymb = katex_commands.filter((val) =>
-        val.symb.includes(searchText)
-      );
-      setKatexRepsents([...reprSrc, ...reprSymb]);
+
+      setKatexRepsents(repr);
     } else {
       setKatexRepsents(katex_commands);
     }
@@ -116,7 +115,7 @@ export const LaTexEditor: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {katexsRepsents.map(({ symb, src }, i) => (
+          {katexsRepsents.splice(0, 15).map(({ symb, src }, i) => (
             <tr key={i}>
               <td className="truncate">{symb}</td>
               <td className="truncate">{src}</td>
