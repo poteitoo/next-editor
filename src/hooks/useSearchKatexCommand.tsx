@@ -24,7 +24,7 @@ export const useSearchKatexCommand = (
   useEffect(() => {
     const fuseSearch = async () => {
       const f = await fuse();
-      const res = f.search(searchText);
+      const res = f.search(searchText, { limit: 30 });
       setResults(res.map((arr) => arr.item));
     };
     fuseSearch();

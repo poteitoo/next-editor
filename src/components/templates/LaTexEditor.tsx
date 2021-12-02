@@ -66,7 +66,7 @@ export const LaTexEditor: React.FC<LaTexEditorTemplate> = ({
 
   return (
     <div className="flex container flex-col p-5 gap-3">
-      <Meta title={AppConfig.title} description={AppConfig.description}>
+      <Meta title="Latexエディター" description={AppConfig.description}>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.css"
@@ -123,7 +123,7 @@ export const LaTexEditor: React.FC<LaTexEditorTemplate> = ({
           </tr>
         </thead>
         <tbody>
-          {katexsRepsents.map(({ symb, src, id }) => (
+          {katexsRepsents.slice(0, 30).map(({ symb, src, id }) => (
             <CopyToClipboard text={src || symb} key={id}>
               <tr>
                 <td className="truncate">{symb}</td>
