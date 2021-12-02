@@ -1,44 +1,49 @@
 import React, { useEffect, useState } from 'react';
 
-// import { AiOutlineSearch } from '@react-icons/all-files/ai/AiOutlineSearch';
 import katex from 'katex';
+// import { AiOutlineSearch } from '@react-icons/all-files/ai/AiOutlineSearch';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { useDebounce } from 'use-debounce';
 
-import katex_commands from '../../../public/katex_commands.json';
 import { AppConfig } from '../../constants/config';
 // import { Icon } from '../atoms/Icon';
+import { useSearchKatexCommand } from '../../hooks/useSearchKatexCommand';
+import { Katex } from '../../utils/types';
 import { KatexText } from '../atoms/KatexText';
 import { TextArea } from '../atoms/TextArea';
 import { Meta } from '../organisms/layout/Meta';
-import { Katex } from '../organisms/SearchModal';
 
-export const LaTexEditor: React.FC = () => {
+export type LaTexEditorTemplate = {
+  katexCommands: {
+    [value: string]: Katex;
+  };
+};
+
+export const LaTexEditor: React.FC<LaTexEditorTemplate> = ({
+  katexCommands,
+}) => {
   const [currentText, setCurrentText] = useState('');
   const [compiledText, setCompiledText] = useState('');
   // const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchKeyword, setSearchKeyword] = useState('');
   const [katexsRepsents, setKatexRepsents] = useState<Katex[] | []>([]);
 
-  const [searchText] = useDebounce(searchKeyword, 500);
+  const { results, setSearchWord } = useSearchKatexCommand(
+    Object.values(katexCommands)
+  );
 
   useEffect(() => {
-    setKatexRepsents(katex_commands);
+    const commands = Object.values(katexCommands);
+    setKatexRepsents(commands);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (searchText.length > 0) {
-      const repr = katex_commands.filter(
-        ({ src, symb }) =>
-          symb.includes(searchText) || src?.includes(searchText)
-      );
-      // .splice(0, 50);
-
-      setKatexRepsents(repr);
+    if (results.length > 0) {
+      setKatexRepsents(results);
     } else {
-      setKatexRepsents(katex_commands);
+      setKatexRepsents(Object.values(katexCommands));
     }
-  }, [searchText]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [results]);
 
   useEffect(() => {
     try {
@@ -106,7 +111,7 @@ export const LaTexEditor: React.FC = () => {
         type="text"
         placeholder="検索"
         className="w-full mt-3 input input-bordered"
-        onChange={(e) => setSearchKeyword(e.target.value)}
+        onChange={(e) => setSearchWord(e.target.value)}
       />
 
       <table className="w-full table table-fixed text-left overflow-auto">
@@ -118,8 +123,8 @@ export const LaTexEditor: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {katexsRepsents.map(({ symb, src }, i) => (
-            <CopyToClipboard text={src || symb} key={symb + i}>
+          {katexsRepsents.map(({ symb, src, id }) => (
+            <CopyToClipboard text={src || symb} key={id}>
               <tr>
                 <td className="truncate">{symb}</td>
                 <td className="truncate">
