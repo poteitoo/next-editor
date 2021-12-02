@@ -17,6 +17,7 @@
     "@react-icons/all-files": "^4.1.0",
     "classnames": "^2.3.1",
     "daisyui": "^1.16.2",
+    "fuse.js": "^6.4.6",
     "katex": "^0.15.1",
     "next": "^12.0.2",
     "next-seo": "^4.28.1",
