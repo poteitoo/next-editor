@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-import { AiOutlineSearch } from '@react-icons/all-files/ai/AiOutlineSearch';
+// import { AiOutlineSearch } from '@react-icons/all-files/ai/AiOutlineSearch';
 import katex from 'katex';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useDebounce } from 'use-debounce';
 
 import katex_commands from '../../../public/katex_commands.json';
 import { AppConfig } from '../../constants/config';
-import { Icon } from '../atoms/Icon';
+// import { Icon } from '../atoms/Icon';
+import { KatexText } from '../atoms/KatexText';
 import { TextArea } from '../atoms/TextArea';
 import { Meta } from '../organisms/layout/Meta';
-import { Katex, SearchModal } from '../organisms/SearchModal';
+import { Katex } from '../organisms/SearchModal';
 
 export const LaTexEditor: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
   const [compiledText, setCompiledText] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [katexsRepsents, setKatexRepsents] = useState<Katex[] | []>([]);
 
@@ -28,8 +30,9 @@ export const LaTexEditor: React.FC = () => {
     if (searchText.length > 0) {
       const repr = katex_commands.filter(
         ({ src, symb }) =>
-          src?.includes(searchText) || symb.includes(searchText)
+          symb.includes(searchText) || src?.includes(searchText)
       );
+      // .splice(0, 50);
 
       setKatexRepsents(repr);
     } else {
@@ -68,7 +71,7 @@ export const LaTexEditor: React.FC = () => {
       </Meta>
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-bold">LaTexエディター</h1>
-        <Icon
+        {/* <Icon
           icon={
             <div className="flex align-center gap-2">
               <AiOutlineSearch className="my-auto" size={24} />
@@ -78,7 +81,7 @@ export const LaTexEditor: React.FC = () => {
             </div>
           }
           onClick={() => setIsModalOpen(true)}
-        />
+        /> */}
       </div>
       <div className="flex gap-8">
         <div className="flex flex-col w-1/2 gap-2">
@@ -115,22 +118,26 @@ export const LaTexEditor: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {katexsRepsents.splice(0, 15).map(({ symb, src }, i) => (
-            <tr key={i}>
-              <td className="truncate">{symb}</td>
-              <td className="truncate">{src}</td>
-              <td className="truncate">{src}</td>
-            </tr>
+          {katexsRepsents.map(({ symb, src }, i) => (
+            <CopyToClipboard text={src || symb} key={symb + i}>
+              <tr>
+                <td className="truncate">{symb}</td>
+                <td className="truncate">
+                  <KatexText text={src} isIgnoreError={true} />
+                </td>
+                <td className="truncate">{src}</td>
+              </tr>
+            </CopyToClipboard>
           ))}
         </tbody>
       </table>
 
-      <SearchModal
+      {/* <SearchModal
         katexs={katexsRepsents}
         isOpen={isModalOpen}
         onCloseModal={setIsModalOpen}
         onChangeText={setSearchKeyword}
-      />
+      /> */}
     </div>
   );
 };
