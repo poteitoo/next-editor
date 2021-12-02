@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { useDebounce } from 'use-debounce';
 
-import { Katex } from '../components/organisms/SearchModal';
+import { Katex } from '../utils/types';
 
 type UseSearchKatexCommandProps = Katex[];
 

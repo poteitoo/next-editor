@@ -1,12 +1,7 @@
 import React from 'react';
 
+import { Katex } from '../../utils/types';
 import { Modal } from '../atoms/Modal';
-
-export type Katex = {
-  symb: string;
-  src: string | null;
-  html?: string;
-};
 
 type SearchModalProps = {
   katexs: Katex[];
