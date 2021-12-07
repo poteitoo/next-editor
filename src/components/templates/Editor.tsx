@@ -54,13 +54,13 @@ export const Editor: React.FC = () => {
       />
       <div className="flex gap-5 mt-3">
         <button
-          className="p-3 rounded hover:bg-gray-800 bg-gray-700"
+          className="p-3 rounded bg-gray-400 hover:bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-700"
           onClick={onClickReset}
         >
           リセットボタン
         </button>
         <button
-          className="p-3 rounded hover:bg-gray-800 bg-gray-700"
+          className="p-3 rounded bg-gray-400 hover:bg-gray-500 dark:hover:bg-gray-800 dark:bg-gray-700"
           onClick={onClickRecover}
           disabled={!isPastTextExisted}
         >
