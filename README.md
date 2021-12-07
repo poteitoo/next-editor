@@ -1,6 +1,6 @@
-#  Character counters and LaTeX editor
+#  Character counters and LaTeX editors
 ## NextJS 12+, Tailwind CSS 2.0 and TypeScript 🚀
-Simple LaTeX editor written in Nextjs, Tailwind CSS (+ daisyUI) and TypeScript.
+[Character counters](https://next-editor-three.vercel.app/) and [Simple LaTeX editors](https://next-editor-three.vercel.app/latex/) written in Nextjs, Tailwind CSS (+ daisyUI) and TypeScript.
 
 
 ### DEMO
