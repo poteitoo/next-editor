@@ -10,15 +10,15 @@ type TextAreaProps = {
   HTMLTextAreaElement
 >;
 
-export const TextArea: React.FC<TextAreaProps> = ({
-  onChangeText,
-  ...props
-}) => {
-  return (
-    <textarea
-      onChange={(e) => onChangeText(e.target.value)}
-      rows={10}
-      {...props}
-    />
-  );
-};
+export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
+  function TextArea({ onChangeText, ...props }, ref) {
+    return (
+      <textarea
+        onChange={(e) => onChangeText(e.target.value)}
+        rows={10}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
