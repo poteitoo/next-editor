@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
 
 import {
-  LaTexEditor,
   LaTexEditorTemplate,
+  LaTexEditorTemplateProps,
 } from '../components/templates/LaTexEditor';
 
-const Latex: NextPage<LaTexEditorTemplate> = (props) => (
-  <LaTexEditor katexCommands={props.katexCommands} />
+const Latex: NextPage<LaTexEditorTemplateProps> = (props) => (
+  <LaTexEditorTemplate katexCommands={props.katexCommands} />
 );
 
 Latex.getInitialProps = async () => {
